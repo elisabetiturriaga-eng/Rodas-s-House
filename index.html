@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rodas´s House · Control Airbnb</title>
+  <style>
+    :root{--coral:#FF5663;--ciruela:#35223F;--gris:#F2F2F4;--texto:#2F3338;--negro:#1A1A1A;--ok:#0B7A45;--warn:#9A5B00;--shadow:0 18px 45px rgba(26,26,26,.10);--radius:18px}*{box-sizing:border-box}body{margin:0;font-family:Montserrat,Inter,Arial,sans-serif;background:radial-gradient(circle at 15% 0%,rgba(255,86,99,.20),transparent 32%),radial-gradient(circle at 95% 10%,rgba(53,34,63,.12),transparent 28%),var(--gris);color:var(--texto);font-size:15px}.top{height:72px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0}.brand{display:flex;gap:12px;align-items:center;font-weight:950;color:var(--negro)}.logo{width:46px;height:46px;border-radius:50%;border:3px solid #111;background:white;display:grid;place-items:center;position:relative}.logo:before{content:"⌂";font-size:27px}.logo:after{content:"";position:absolute;width:10px;height:14px;background:var(--coral);border-radius:7px 7px 2px 2px;bottom:10px}.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 70px}.hero{background:#fff;border:1px solid #ddd;border-radius:28px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:1fr 1fr}.hero-left{background:linear-gradient(135deg,var(--ciruela),#4A2B52);color:white;padding:42px}.hero-left h1{font-size:42px;line-height:1;margin:18px 0}.hero-left p{color:#F9EEF1}.hero-right{padding:42px}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:900;background:var(--coral);color:#111;cursor:pointer}.btn-dark{background:var(--ciruela);color:#fff}.btn-ghost{background:#fff;border:1.5px solid #ccc;color:#111}.grid{display:grid;gap:16px}.grid4{grid-template-columns:repeat(4,1fr);margin-top:20px}.card{background:#fff;border:1px solid #ddd;border-radius:var(--radius);padding:20px;box-shadow:0 8px 20px rgba(26,26,26,.04)}.card small{font-weight:800;color:#565B62}.card b{display:block;color:#111;font-size:28px;margin-top:4px}.badge{display:inline-block;border-radius:999px;padding:5px 10px;font-weight:900;font-size:12px;background:#E9F8EF;color:var(--ok);border:1px solid #B7E4C7}.badge.warn{background:#FFF7E6;color:var(--warn);border-color:#FFD27A}table{width:100%;border-collapse:collapse;background:white;border-radius:16px;overflow:hidden}th{background:var(--coral);color:#111;text-align:left;padding:12px;text-transform:uppercase;font-size:13px}td{padding:12px;border-top:1px solid #eee}.hidden{display:none}.notice{background:#FFF7ED;border:1px solid #FED7AA;color:#7C2D12;border-radius:14px;padding:12px;font-weight:700;margin-top:16px}@media(max-width:850px){.hero,.grid4{grid-template-columns:1fr}.hero-left h1{font-size:32px}.top{padding:0 14px}}
+  </style>
+</head>
+<body>
+  <div class="top"><div class="brand"><div class="logo"></div><span>Rodas´s House · Panel interno</span></div><button class="btn btn-dark" onclick="logout()">Salir</button></div>
+  <main class="wrap">
+    <section id="login" class="hero">
+      <div class="hero-left"><div class="brand" style="color:white"><div class="logo"></div><span>Rodas´s House</span></div><h1>Control privado de alojamiento</h1><p>Versión publicada en GitHub Pages sin datos personales ni financieros expuestos públicamente.</p><p><span class="badge">Marca cálida · clara · profesional</span></p></div>
+      <div class="hero-right"><h2>Iniciar sesión demo</h2><p>Acceso seguro de demostración para comprobar la app publicada.</p><label>Email</label><input id="email" style="width:100%;padding:12px;border:1.5px solid #ccc;border-radius:14px" value="admin@demo.local"><label style="display:block;margin-top:12px">Contraseña</label><input id="pass" type="password" style="width:100%;padding:12px;border:1.5px solid #ccc;border-radius:14px" value="demo123"><button class="btn" style="margin-top:16px" onclick="login()">Entrar</button><div class="notice">Los teléfonos, huéspedes reales, NIF, IBAN y claves reales no se publican en esta versión pública.</div></div>
+    </section>
+    <section id="app" class="hidden">
+      <h1 style="font-size:34px;color:#111">Panel principal</h1><p>Resumen operativo saneado para publicación pública.</p>
+      <div class="grid grid4"><div class="card"><small>Ingresos demo</small><b>8.742 €</b></div><div class="card"><small>Reservas futuras</small><b>12</b></div><div class="card"><small>Facturas pendientes</small><b>8</b></div><div class="card"><small>Limpiezas pendientes</small><b>9</b></div></div>
+      <div class="card" style="margin-top:20px"><h2>Reservas</h2><table><thead><tr><th>Huésped</th><th>Código</th><th>Periodo</th><th>Noches</th><th>Estado</th><th>Limpieza</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <div class="card" style="margin-top:20px"><h2>Facturas</h2><p><b style="font-size:18px">Vista previa corporativa</b></p><p>Rodas´s House · factura demo sin datos fiscales, bancarios ni personales publicados.</p><button class="btn btn-ghost" onclick="window.print()">Imprimir / PDF</button></div>
+    </section>
+  </main>
+<script>
+const bookings=[['Huésped 01','RH-1001','29/08/2026 - 05/09/2026',7,'Confirmada','Pendiente'],['Huésped 02','RH-1002','19/08/2026 - 29/08/2026',10,'Confirmada','Pendiente'],['Huésped 03','RH-1003','29/07/2026 - 12/08/2026',14,'Confirmada','Pendiente'],['Huésped 04','RH-1004','21/07/2026 - 27/07/2026',6,'Confirmada','Programada'],['Huésped 05','RH-1005','30/06/2026 - 05/07/2026',5,'Confirmada','Pendiente']];
+function login(){if(email.value==='admin@demo.local'&&pass.value==='demo123'){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');render()}else alert('Credenciales demo: admin@demo.local / demo123')}
+function logout(){document.getElementById('app').classList.add('hidden');document.getElementById('login').classList.remove('hidden')}
+function render(){rows.innerHTML=bookings.map(b=>`<tr><td>${b[0]}</td><td>${b[1]}</td><td>${b[2]}</td><td>${b[3]}</td><td><span class="badge">${b[4]}</span></td><td><span class="badge warn">${b[5]}</span></td></tr>`).join('')}
+</script>
+</body>
+</html>
